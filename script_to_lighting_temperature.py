@@ -4,6 +4,7 @@ import json
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
+from pathlib import Path
 
 # OpenAI API Key
 load_dotenv()
@@ -25,7 +26,9 @@ LIGHTING_OPTIONS = {
 def output_lighting_option(script_path) -> dict:
     """ask LLM and output lighting option"""
     client = OpenAI()
-    script = load_script(script_path)
+
+    with open(script_path, "r", encoding="utf-8") as f:
+        script = f.read()
 
     PROMPT = f"""
     SCRIPT:
@@ -73,7 +76,10 @@ def output_lighting_option(script_path) -> dict:
         temperature_number = 5500
     elif temperature == "warm":
         temperature_number = 2500
+
     output = {
+        "script_path": str(script_path),
+        "script": script,
         "lighting_temperature": temperature_number,
         "reason": answer.get("reason", "")
     }
@@ -81,5 +87,24 @@ def output_lighting_option(script_path) -> dict:
     return output
 
 if __name__ == "__main__":
-    output = output_lighting_option("Script/script_cold.txt")
-    print(output)
+    input_path = Path("./scripts/1.txt")
+    output_root = Path("script_to_lighting_outputs")
+
+    num_attempts = 1
+
+    for attempt in range(1, num_attempts + 1):
+        attempt_folder = output_root / f"attempt{attempt}"
+        attempt_folder.mkdir(parents=True, exist_ok=True,)
+
+        try:
+            output = output_lighting_option(input_path)
+
+            output_path = (attempt_folder / f"{input_path.stem}_output.json")
+
+            with open(output_path, "w", encoding="utf-8",) as f:
+                json.dump(output, f, ensure_ascii=False, indent=2,)
+
+            print(f"Attempt {attempt}, " f"Script {input_path.stem}: " f"{output['lighting_temperature']}K")
+
+        except Exception as error:
+            print(f"Attempt {attempt}, " f"Script {input_path.stem} 오류: {error}")

@@ -1,0 +1,5 @@
+{
+  "video_path": "result_videos/default.mp4",
+  "lighting_temperature": "cold",
+  "reason": "The target video frames have a noticeable blue tint and desaturated look, closely matching the color characteristics of the cold (8500K) reference image."
+}
