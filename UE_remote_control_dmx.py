@@ -24,7 +24,7 @@ def dmx_remote_control(temperature):
     }
 
     payload_dmx_enabled = {
-        "PropertyValue": False,
+        "PropertyValue": True,
         "GenerateTransaction": True
     }
 
@@ -40,4 +40,4 @@ def dmx_remote_control(temperature):
     print(dmx_flag_r.text)
 
 if __name__ == "__main__":
-    dmx_remote_control(2500)
+    dmx_remote_control(8500)
