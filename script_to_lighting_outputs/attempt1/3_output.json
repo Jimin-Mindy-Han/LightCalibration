@@ -1,6 +1,10 @@
 {
-  "script_path": "scripts/3.txt",
+  "script_path": "scripts\\3.txt",
   "script": "A person walks in a subway car. The quiet car is filled with a soft amber glow, creating a calm and intimate mood.",
-  "lighting_temperature": 2500,
+  "lighting_temperature": {
+    "r": 255,
+    "g": 100,
+    "b": 50
+  },
   "reason": "The script describes a soft amber glow and a calm, intimate mood, which matches warm lighting."
 }

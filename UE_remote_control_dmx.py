@@ -1,6 +1,39 @@
 import requests
 from urllib.parse import quote
 
+# def dmx_remote_control(temperature: dict):
+#     BASE = "http://127.0.0.1:30011"
+#     preset = quote("NewRemoteControlPreset", safe="")
+#     prop = quote("Linear Color Input", safe="")
+#     prop_dmx_enabled = quote("DmxEnabled", safe="")
+#
+#     payload = {
+#         "PropertyValue": {
+#             "R": temperature["r"]/255,
+#             "G": temperature["g"]/255,
+#             "B": temperature["b"]/255,
+#             "A": 1.5 # 실제 쓰이지는 않는 값
+#         },
+#         "GenerateTransaction": True
+#     }
+#
+#     payload_dmx_enabled = {
+#         "PropertyValue": True,
+#         "GenerateTransaction": True
+#     }
+#
+#     url = f"{BASE}/remote/preset/{preset}/property/{prop}"
+#     dmx_flag_url = f"{BASE}/remote/preset/{preset}/property/{prop_dmx_enabled}"
+#
+#     r = requests.put(url, json=payload)
+#     dmx_flag_r = requests.put(dmx_flag_url, json=payload_dmx_enabled)
+#
+#     print(r.status_code)
+#     print(dmx_flag_r.status_code)
+#     print(r.text)
+#     print(dmx_flag_r.text)
+
+# CCT
 def dmx_remote_control(temperature):
     BASE = "http://127.0.0.1:30011"
     preset = quote("NewRemoteControlPreset", safe="")
@@ -40,4 +73,10 @@ def dmx_remote_control(temperature):
     print(dmx_flag_r.text)
 
 if __name__ == "__main__":
-    dmx_remote_control(8500)
+  #   lighting_temperature = {
+  #   "r": 255,
+  #   "g": 100,
+  #   "b": 50
+  # }
+  #   dmx_remote_control(lighting_temperature)
+  dmx_remote_control(8500)

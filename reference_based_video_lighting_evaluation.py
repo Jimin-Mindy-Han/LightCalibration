@@ -54,24 +54,23 @@ def extract_frames(video_path: str, ) -> list[str]:
 
     return encoded_frames
 
-
 def analyze_video_with_vlm(video_path: str) -> str:
     """
-    영상 프레임을 추출하고 VLM에 전달합니다.
-    VLM에 각 색온도(2500, 5500, 8500K)에서 촬영한 참조 이미지를 미리 전달하여, 참조 이미지와 입력된 영상을 비교하여 결과를 도출합니다.
+    영상 프레임을 추출하고 VLM에 전달
+    VLM에 각 RGB 설정값 옵션(따뜻함, 뉴트럴, 차가움)에서 촬영한 참조 이미지를 미리 전달하여, 참조 이미지와 입력된 영상을 비교하여 결과를 도출
     """
     frames = extract_frames(video_path=video_path,)
 
     if not frames:
         raise RuntimeError("추출된 프레임이 없습니다.")
 
-    # 2500K 이미지 base64 encode
-    with open("reference_image/2500K.png", "rb") as f:
-        warm_ref = base64.b64encode(f.read()).decode("utf-8")
-    with open("reference_image/5500K.png", "rb") as f:
-        default_ref = base64.b64encode(f.read()).decode("utf-8")
-    with open("reference_image/8500K.png", "rb") as f:
-        cold_ref = base64.b64encode(f.read()).decode("utf-8")
+    # # 2500K 이미지 base64 encode
+    # with open("reference_image/2500K.png", "rb") as f:
+    #     warm_ref = base64.b64encode(f.read()).decode("utf-8")
+    # with open("reference_image/5500K.png", "rb") as f:
+    #     default_ref = base64.b64encode(f.read()).decode("utf-8")
+    # with open("reference_image/8500K.png", "rb") as f:
+    #     cold_ref = base64.b64encode(f.read()).decode("utf-8")
 
     content = [
         {
@@ -137,6 +136,91 @@ Return only valid JSON in this format:
 
     result = json.loads(response.output_text)
     return result
+
+
+# CCT
+# def analyze_video_with_vlm(video_path: str) -> str:
+#     """
+#     영상 프레임을 추출하고 VLM에 전달
+#     VLM에 각 색온도(2500, 5500, 8500K)에서 촬영한 참조 이미지를 미리 전달하여, 참조 이미지와 입력된 영상을 비교하여 결과를 도출
+#     """
+#     frames = extract_frames(video_path=video_path,)
+#
+#     if not frames:
+#         raise RuntimeError("추출된 프레임이 없습니다.")
+#
+#     # 2500K 이미지 base64 encode
+#     with open("reference_image/2500K.png", "rb") as f:
+#         warm_ref = base64.b64encode(f.read()).decode("utf-8")
+#     with open("reference_image/5500K.png", "rb") as f:
+#         default_ref = base64.b64encode(f.read()).decode("utf-8")
+#     with open("reference_image/8500K.png", "rb") as f:
+#         cold_ref = base64.b64encode(f.read()).decode("utf-8")
+#
+#     content = [
+#         {
+#             "type": "input_text",
+#             "text": """
+# The first three images are reference images captured under known lighting conditions:
+#
+# Reference 1: warm, 2500K
+# Reference 2: default, 5500K
+# Reference 3: cold, 8500K
+#
+# Use these references as the classification standard.
+# Do not classify based on narrative mood, time of day, or scene semantics.
+# Compare only the visible color characteristics of the target video frames with the three reference images.
+#
+# The remaining images are sequential frames from the target video.
+#
+# Select the reference lighting condition that is visually closest to the target video.
+#
+# Return only valid JSON in this format:
+# {
+#     "lighting_temperature": "cold" | "default" | "warm",
+#     "reason": "short reason"
+# }
+# """,
+#         }
+#     ]
+#
+#     content.append({
+#         "type": "input_image",
+#         "image_url": f"data:image/jpeg;base64,{warm_ref}"
+#     })
+#
+#     content.append({
+#         "type": "input_image",
+#         "image_url": f"data:image/jpeg;base64,{default_ref}"
+#     })
+#
+#     content.append({
+#         "type": "input_image",
+#         "image_url": f"data:image/jpeg;base64,{cold_ref}"
+#     })
+#     for frame in frames:
+#         content.append(
+#             {
+#                 "type": "input_image",
+#                 "image_url": (
+#                     f"data:image/jpeg;base64,{frame}"
+#                 ),
+#             }
+#         )
+#
+#     response = client.responses.create(
+#         model="gpt-4.1",
+#         input=[
+#             {
+#                 "role": "user",
+#                 "content": content,
+#             }
+#         ],
+#         temperature=0,
+#     )
+#
+#     result = json.loads(response.output_text)
+#     return result
 
 
 if __name__ == "__main__":

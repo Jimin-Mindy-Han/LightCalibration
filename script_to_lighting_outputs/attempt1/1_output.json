@@ -1,6 +1,10 @@
 {
-  "script_path": "scripts/1.txt",
+  "script_path": "scripts\\1.txt",
   "script": "A person walks in a subway car. It's late night, nobody is there.",
-  "lighting_temperature": 8500,
-  "reason": "Late night, empty subway suggests a lonely, tense, and sterile atmosphere."
+  "lighting_temperature": {
+    "r": 50,
+    "g": 100,
+    "b": 255
+  },
+  "reason": "The late night, empty subway car suggests a lonely and tense atmosphere best suited to cold lighting."
 }

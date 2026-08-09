@@ -12,6 +12,19 @@ api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 temperature_number = 0
 
+# RGB
+# def load_script(script_path):
+#     with open(script_path, "r", encoding="utf-8") as f:
+#         script = f.read()
+#     return script
+#
+# LIGHTING_OPTIONS = {
+#     "cold": {"r": 50, "g": 100, "b": 255},
+#     "neutral": {"r": 255, "g": 255, "b": 255},
+#     "warm": {"r": 255, "g": 100, "b": 50}
+# }
+
+# CCT
 def load_script(script_path):
     with open(script_path, "r", encoding="utf-8") as f:
         script = f.read()
@@ -19,9 +32,73 @@ def load_script(script_path):
 
 LIGHTING_OPTIONS = {
     "cold": 8500,
-    "default": 5500,
+    "neutral": 5500,
     "warm": 2500
 }
+
+# RGB output
+# def output_lighting_option(script_path) -> dict:
+#     """ask LLM and output lighting option"""
+#     client = OpenAI()
+#
+#     with open(script_path, "r", encoding="utf-8") as f:
+#         script = f.read()
+#
+#     PROMPT = f"""
+#     SCRIPT:
+#     {script}
+#
+#     You are a lighting control assistant for virtual production.
+#
+#     Your task is to select exactly one lighting option based on the script.
+#
+#     Available options:
+#     - cold: (R=160, G=200, B=255), for cold, tense, lonely, blue, night, sterile, or suspenseful scenes.
+#     - neutral: (R=255, G=255, B=255), for neutral, ordinary, or unspecified lighting.
+#     - warm: (R=255, G=180, B=120), for warm, emotional, nostalgic, cozy, intimate, sunset, or soft scenes.
+#
+#     Return only valid JSON in this format:
+#     {{
+#         "lighting_temperature": "cold" | "neutral" | "warm",
+#         "reason": "short reason"
+#     }}
+#
+#     If the script does not clearly imply a lighting mood, choose neutral.
+#     """
+#
+#     response = client.responses.create(
+#         model = "gpt-4.1",
+#         input = [{
+#             "role": "user",
+#             "content": [
+#                 {"type": "input_text", "text": PROMPT},
+#             ]
+#         }],
+#         temperature = 0
+#     )
+#
+#     answer = json.loads(response.output_text)
+#
+#     temperature = answer.get("lighting_temperature")
+#
+#     if temperature not in LIGHTING_OPTIONS:
+#         temperature = "neutral"
+#
+#     if temperature == "cold":
+#         temperature_number = LIGHTING_OPTIONS["cold"]
+#     elif temperature == "neutral":
+#         temperature_number = LIGHTING_OPTIONS["neutral"]
+#     elif temperature == "warm":
+#         temperature_number = LIGHTING_OPTIONS["warm"]
+#
+#     output = {
+#         "script_path": str(script_path),
+#         "script": script,
+#         "lighting_temperature": temperature_number,
+#         "reason": answer.get("reason", "")
+#     }
+#
+#     return output
 
 def output_lighting_option(script_path) -> dict:
     """ask LLM and output lighting option"""
@@ -39,17 +116,17 @@ def output_lighting_option(script_path) -> dict:
     Your task is to select exactly one lighting option based on the script.
 
     Available options:
-    - cold: 8500K, for cold, tense, lonely, blue, night, sterile, or suspenseful scenes. 
-    - default: 5500K, for neutral, ordinary, or unspecified lighting.
+    - cold: 8500K, for cold, tense, lonely, blue, night, sterile, or suspenseful scenes.
+    - neutral: 5500K, for neutral, ordinary, or unspecified lighting.
     - warm: 2500K, for warm, emotional, nostalgic, cozy, intimate, sunset, or soft scenes.
 
     Return only valid JSON in this format:
     {{
-        "lighting_temperature": "cold" | "default" | "warm",
+        "lighting_temperature": "cold" | "neutral" | "warm",
         "reason": "short reason"
     }}
 
-    If the script does not clearly imply a lighting mood, choose default.
+    If the script does not clearly imply a lighting mood, choose neutral.
     """
 
     response = client.responses.create(
@@ -68,11 +145,11 @@ def output_lighting_option(script_path) -> dict:
     temperature = answer.get("lighting_temperature")
 
     if temperature not in LIGHTING_OPTIONS:
-        temperature = "default"
+        temperature = "neutral"
 
     if temperature == "cold":
         temperature_number = 8500
-    elif temperature == "default":
+    elif temperature == "neutral":
         temperature_number = 5500
     elif temperature == "warm":
         temperature_number = 2500
@@ -104,7 +181,7 @@ if __name__ == "__main__":
             with open(output_path, "w", encoding="utf-8",) as f:
                 json.dump(output, f, ensure_ascii=False, indent=2,)
 
-            print(f"Attempt {attempt}, " f"Script {input_path.stem}: " f"{output['lighting_temperature']}K")
+            print(f"Attempt {attempt}, " f"Script {input_path.stem}: " f"{output['lighting_temperature']}")
 
         except Exception as error:
             print(f"Attempt {attempt}, " f"Script {input_path.stem} 오류: {error}")
