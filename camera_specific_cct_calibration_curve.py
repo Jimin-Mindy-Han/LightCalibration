@@ -86,7 +86,7 @@ colorchecker = image[y1:y1+h1, x1:x1+w1]
 # 3. Gray patch 선택
 # -------------------------
 
-for i in range(4):
+for i in range(0):
 
     display_c = cv2.resize(
         colorchecker,
@@ -141,3 +141,47 @@ print("Error Before Correction:", 100*(abs(measured_cct-8500)/8500), "%")
 print("Corrected CCT:", corrected_cct, "K")
 print("Ground Truth:", 8500, "K")
 print("Error After Correction:", 100*(abs(corrected_cct - 8500)/8500), "%")
+
+# -------------------------
+# Calibration curve plot
+# -------------------------
+
+x_plot = np.linspace(
+    estimated_cct.min(),
+    estimated_cct.max(),
+    500
+)
+
+y_plot = calibration_curve(x_plot)
+
+plt.figure(figsize=(8, 6))
+
+# calibration reference points
+plt.scatter(
+    estimated_cct,
+    target_cct,
+    label="Reference points"
+)
+
+# interpolation curve
+plt.plot(
+    x_plot,
+    y_plot,
+    label="Calibration curve"
+)
+
+# ideal line: estimated CCT = target CCT
+plt.plot(
+    x_plot,
+    x_plot,
+    linestyle="--",
+    label="Ideal (y = x)"
+)
+
+plt.xlabel("Estimated CCT [K]")
+plt.ylabel("Target CCT [K]")
+plt.title("Camera-Specific CCT Calibration Curve")
+
+plt.legend()
+plt.grid(True)
+plt.show()
