@@ -1,0 +1,134 @@
+Virtual Light:
+{'r': 43, 'g': 43, 'b': 43}
+Calculated Physical Light:
+{'r': 61, 'g': 59, 'b': 39}
+
+Virtual Light:
+{'r': 43, 'g': 43, 'b': 128}
+Calculated Physical Light:
+{'r': 86, 'g': 71, 'b': 108}
+
+Virtual Light:
+{'r': 43, 'g': 43, 'b': 213}
+Calculated Physical Light:
+{'r': 112, 'g': 84, 'b': 176}
+
+Virtual Light:
+{'r': 43, 'g': 128, 'b': 43}
+Calculated Physical Light:
+{'r': 43, 'g': 134, 'b': 32}
+
+Virtual Light:
+{'r': 43, 'g': 128, 'b': 128}
+Calculated Physical Light:
+{'r': 68, 'g': 147, 'b': 100}
+
+Virtual Light:
+{'r': 43, 'g': 128, 'b': 213}
+Calculated Physical Light:
+{'r': 94, 'g': 160, 'b': 169}
+
+Virtual Light:
+{'r': 43, 'g': 213, 'b': 43}
+Calculated Physical Light:
+{'r': 25, 'g': 209, 'b': 24}
+
+Virtual Light:
+{'r': 43, 'g': 213, 'b': 128}
+Calculated Physical Light:
+{'r': 50, 'g': 222, 'b': 93}
+
+Virtual Light:
+{'r': 43, 'g': 213, 'b': 213}
+Calculated Physical Light:
+{'r': 76, 'g': 235, 'b': 161}
+
+Virtual Light:
+{'r': 128, 'g': 43, 'b': 43}
+Calculated Physical Light:
+{'r': 172, 'g': 86, 'b': 55}
+
+Virtual Light:
+{'r': 128, 'g': 43, 'b': 128}
+Calculated Physical Light:
+{'r': 198, 'g': 99, 'b': 124}
+
+Virtual Light:
+{'r': 128, 'g': 43, 'b': 213}
+Calculated Physical Light:
+{'r': 224, 'g': 112, 'b': 192}
+
+Virtual Light:
+{'r': 128, 'g': 128, 'b': 43}
+Calculated Physical Light:
+{'r': 154, 'g': 161, 'b': 48}
+
+Virtual Light:
+{'r': 128, 'g': 128, 'b': 128}
+Calculated Physical Light:
+{'r': 180, 'g': 174, 'b': 116}
+
+Virtual Light:
+{'r': 128, 'g': 128, 'b': 213}
+Calculated Physical Light:
+{'r': 206, 'g': 187, 'b': 185}
+
+Virtual Light:
+{'r': 128, 'g': 213, 'b': 43}
+Calculated Physical Light:
+{'r': 136, 'g': 237, 'b': 40}
+
+Virtual Light:
+{'r': 128, 'g': 213, 'b': 128}
+Calculated Physical Light:
+{'r': 162, 'g': 250, 'b': 109}
+
+Virtual Light:
+{'r': 128, 'g': 213, 'b': 213}
+Calculated Physical Light:
+{'r': 188, 'g': 255, 'b': 177}
+
+Virtual Light:
+{'r': 213, 'g': 43, 'b': 43}
+Calculated Physical Light:
+{'r': 255, 'g': 113, 'b': 71}
+
+Virtual Light:
+{'r': 213, 'g': 43, 'b': 128}
+Calculated Physical Light:
+{'r': 255, 'g': 126, 'b': 140}
+
+Virtual Light:
+{'r': 213, 'g': 43, 'b': 213}
+Calculated Physical Light:
+{'r': 255, 'g': 139, 'b': 208}
+
+Virtual Light:
+{'r': 213, 'g': 128, 'b': 43}
+Calculated Physical Light:
+{'r': 255, 'g': 189, 'b': 64}
+
+Virtual Light:
+{'r': 213, 'g': 128, 'b': 128}
+Calculated Physical Light:
+{'r': 255, 'g': 202, 'b': 132}
+
+Virtual Light:
+{'r': 213, 'g': 128, 'b': 213}
+Calculated Physical Light:
+{'r': 255, 'g': 214, 'b': 201}
+
+Virtual Light:
+{'r': 213, 'g': 213, 'b': 43}
+Calculated Physical Light:
+{'r': 248, 'g': 255, 'b': 56}
+
+Virtual Light:
+{'r': 213, 'g': 213, 'b': 128}
+Calculated Physical Light:
+{'r': 255, 'g': 255, 'b': 125}
+
+Virtual Light:
+{'r': 213, 'g': 213, 'b': 213}
+Calculated Physical Light:
+{'r': 255, 'g': 255, 'b': 193}

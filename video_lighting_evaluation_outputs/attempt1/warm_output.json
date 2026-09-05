@@ -1,5 +1,0 @@
-{
-  "video_path": "result_videos/warm.mp4",
-  "lighting_temperature": "warm",
-  "reason": "The target video frames have a noticeable orange/yellow tint, closely matching the warm (2500K) reference image."
-}

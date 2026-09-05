@@ -1,5 +1,6 @@
 import requests
 from urllib.parse import quote
+import time
 
 def dmx_remote_control(lighting_condition: dict):
     BASE = "http://127.0.0.1:30010"
@@ -19,7 +20,7 @@ def dmx_remote_control(lighting_condition: dict):
     }
 
     payload2 = {
-        "PropertyValue": lighting_condition["i"]*20/255,
+        "PropertyValue": 20.0,
         "GenerateTransaction": True
     }
 
@@ -42,6 +43,24 @@ def dmx_remote_control(lighting_condition: dict):
     print(r.text)
     print(dmx_flag_r.text)
     print(intensity_r.text)
+
+def ColorCheckerCapture():
+    URL = "http://127.0.0.1:30010"
+    PRESET = quote("NewRemoteControlPreset", safe="")
+    FUNCTION = quote("Capture Color Checker", safe="")
+
+    payload = {
+        "Parameters": {},
+        "GenerateTransaction": True
+    }
+
+    response = requests.put(
+        f"{URL}/remote/preset/{PRESET}/function/{FUNCTION}",
+        json=payload
+    )
+
+    print(response.status_code)
+    print(response.text)
 
 # # CCT
 # def dmx_remote_control(temperature):
@@ -90,4 +109,6 @@ if __name__ == "__main__":
     "i": 255
   }
     dmx_remote_control(lighting_temperature)
+    # time.sleep(0.5)
+    # ColorCheckerCapture()
   # dmx_remote_control(8500)
