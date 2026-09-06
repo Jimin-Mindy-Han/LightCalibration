@@ -217,9 +217,7 @@ $$
 4. Physical RGB와 Virtual RGB 사이의 관계를 다음과 같이 정의한다.
 
 $$
-\mathbf{v}
-=
-M\mathbf{p}
+\mathbf{v} = M\mathbf{p}
 $$
 
 여기서,
@@ -276,9 +274,7 @@ Example:
 2. Calibration 단계에서 정의한 관계는 다음과 같다.
 
 $$
-\mathbf{v}
-=
-M\mathbf{p}
+\mathbf{v} = M\mathbf{p}
 $$
 
 여기서,
@@ -290,9 +286,7 @@ $$
 3. 주어진 virtual RGB에 대응하는 physical RGB를 구하기 위해 calibration matrix의 pseudoinverse를 사용한다.
 
 $$
-\mathbf{p}
-=
-M^{+}\mathbf{v}
+\mathbf{p} = M^{+}\mathbf{v}
 $$
 
 4. 계산된 physical RGB 조건으로 실제 조명을 제어하고 ColorChecker 이미지를 촬영한다.
@@ -300,19 +294,11 @@ $$
 6. 각 패치의 XYZ Euclidean distance를 계산하고, 24개 패치의 평균 error를 구한다.
 
 $$
-e_i =
-\sqrt{
-(X_{physical}-X_{virtual})^2 +
-(Y_{physical}-Y_{virtual})^2 +
-(Z_{physical}-Z_{virtual})^2
-}
+e_i = \sqrt{(X_{physical}-X_{virtual})^2 + (Y_{physical}-Y_{virtual})^2 + (Z_{physical}-Z_{virtual})^2}
 $$
 
 $$
-E_{mean}
-=
-\frac{1}{24}
-\sum_{i=1}^{24} e_i
+E_{mean} = \frac{1}{24} \sum_{i=1}^{24} e_i
 $$
 
 ### Output
@@ -368,14 +354,7 @@ $$
 4. Calibration 적용에 따른 improvement를 다음과 같이 계산한다.
 
 $$
-\mathrm{Improvement}(\%)
-=
-\frac{
-E_{baseline} - E_{calibrated}
-}{
-E_{baseline}
-}
-\times 100
+\mathrm{Improvement}(\%) = \frac{E_{baseline} - E_{calibrated}}{E_{baseline}} \times 100
 $$
 
 5. Improvement가 양수이면 calibration 적용 후 XYZ error가 감소한 것을 의미한다.
@@ -397,11 +376,7 @@ Example:
 - 여러 validation condition에 대해 평균 improvement를 계산하여 전체적인 calibration 효과를 확인한다.
 
 $$
-\overline{\mathrm{Improvement}}
-=
-\frac{1}{N}
-\sum_{i=1}^{N}
-\mathrm{Improvement}_i
+\overline{\mathrm{Improvement}} = \frac{1}{N} \sum_{i=1}^{N} \mathrm{Improvement}_i
 $$
 
 23.16127786146579% 더 나아진 것을 확인했다.
