@@ -354,8 +354,9 @@ $$
 4. Calibration 적용에 따른 improvement를 다음과 같이 계산한다.
 
 $$
-\mathrm{Improvement}(\%) = \frac{E_{baseline} - E_{calibrated}}{E_{baseline}} \times 100
+\mathrm{Improvement} (\\%) = \frac{E_{baseline} - E_{calibrated}}{E_{baseline}} \times 100
 $$
+
 
 5. Improvement가 양수이면 calibration 적용 후 XYZ error가 감소한 것을 의미한다.
 6. 모든 validation condition에 대해 baseline error, calibrated error, improvement를 하나의 CSV 파일에 저장한다.
