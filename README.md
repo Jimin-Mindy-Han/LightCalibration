@@ -164,10 +164,7 @@ Example:
 3. 가장 작은 error를 가지는 physical light 조건을 선택한다.
 
 $$
-p^*
-=
-\arg\min_{p}
-E_{mean}(v,p)
+p^* = \arg\min_{p} E_{mean}(v,p)
 $$
 
 여기서
@@ -214,21 +211,7 @@ Example:
 2. 각 RGB 값을 열벡터 형태로 구성한다.(각 RGB 값은 0~255)
 
 $$
-\mathbf{p}
-=
-\begin{bmatrix}
-R_p \\
-G_p \\
-B_p
-\end{bmatrix}
-,\qquad
-\mathbf{v}
-=
-\begin{bmatrix}
-R_v \\
-G_v \\
-B_v
-\end{bmatrix}
+\mathbf{p} = \begin{bmatrix} R_p \\ G_p \\ B_p \end{bmatrix} ,\qquad \mathbf{v} = \begin{bmatrix} R_v \\ G_v \\ B_v \end{bmatrix}
 $$
 
 4. Physical RGB와 Virtual RGB 사이의 관계를 다음과 같이 정의한다.
@@ -248,9 +231,7 @@ $$
 5. 여러 physical-virtual RGB pair를 이용하여 least-squares 방식으로 calibration matrix를 추정한다.
 
 $$
-M
-=
-V P^{+}
+M = V P^{+}
 $$
 
 여기서,
