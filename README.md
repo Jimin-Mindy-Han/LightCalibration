@@ -354,7 +354,7 @@ $$
 4. Calibration 적용에 따른 improvement를 다음과 같이 계산한다.
 
 $$
-\mathrm{Improvement} (\\%) = \frac{E_{baseline} - E_{calibrated}}{E_{baseline}} \times 100
+\mathrm{Improvement}  = \frac{E_{baseline} - E_{calibrated}}{E_{baseline}} \times 100 (\\%)
 $$
 
 
