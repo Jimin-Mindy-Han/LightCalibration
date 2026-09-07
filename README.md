@@ -1,5 +1,40 @@
 # ColorChecker Calibration Pipeline
 
+### Overview
+Led Wall 기반의 Virtual Production 환경에서 Physical light와 Unreal Engine의 virtual light 사이의 색상 차이를 줄이기 위해 
+
+ColorChecker 기반의 lighting calibration pipeline을 구현했습니다.
+
+| Physical ColorChecker                      | Virtual ColorChecker                      |
+|--------------------------------------------|-------------------------------------------|
+| ![](readmeImage/physical_colorchecker.png) | ![](readmeImage/virtual_colorchecker.png) |
+
+### Calibration Pipeline
+
+![Calibration Pipeline](readmeImage/calibration_pipeline.jpg)
+
+1. Physical ColorChecker 이미지 촬영
+2. Virtual ColorChecker를 HDR SceneColor로 캡처
+3. 각 패치의 RGB를 CIE XYZ로 변환
+4. Physical–Virtual XYZ error 계산
+5. 최소 error를 갖는 조명 쌍 탐색
+6. Least Squares를 이용해 3×3 calibration matrix 계산
+7. Calibration 전후 error 비교
+
+
+### Result
+
+Calibration reduced the overall mean XYZ error by **28.37%** across the validation conditions.
+
+![Overall Mean XYZ Error](colorchecker_calibration_result/test/test_error_result/overall_mean_xyz_error.png)
+
+#### Per-condition Results
+
+For each virtual RGB condition, the calibrated physical light generally produced a lower XYZ error than the uncalibrated baseline.
+
+![Per-condition XYZ Error](colorchecker_calibration_result/test/test_error_result/xyz_error_by_virtual_rgb.png)
+
+
 ## 1. Define patch ROIs in HDR and PNG images
 
 ### Files
@@ -360,7 +395,8 @@ $$
 
 5. Improvement가 양수이면 calibration 적용 후 XYZ error가 감소한 것을 의미한다.
 6. 모든 validation condition에 대해 baseline error, calibrated error, improvement를 하나의 CSV 파일에 저장한다.
-7. 전체 validation condition의 평균 improvement를 계산하여 calibration 성능을 요약한다.
+7. 전체 validation condition에 대해 baseline mean XYZ error와 calibrated mean XYZ error를 각각 계산한다.
+8. 두 전체 평균 error를 이용하여 overall error reduction을 계산한다.
 
 ### Output
 - Baseline과 calibrated result의 비교 결과가 저장된 CSV 파일
@@ -377,7 +413,13 @@ Example:
 - 여러 validation condition에 대해 평균 improvement를 계산하여 전체적인 calibration 효과를 확인한다.
 
 $$
-\overline{\mathrm{Improvement}} = \frac{1}{N} \sum_{i=1}^{N} \mathrm{Improvement}_i
+\overline{E}_{baseline}=\frac{1}{N}\sum_{i=1}^{N}E_{baseline,i}
 $$
 
-23.16127786146579% 더 나아진 것을 확인했다.
+$$
+\overline{E}_{calibrated}=\frac{1}{N}\sum_{i=1}^{N}E_{calibrated,i}
+$$
+
+$$
+\mathrm{Overall\ Error\ Reduction}=\frac{\overline{E}_{baseline}-\overline{E}_{calibrated}}{\overline{E}_{baseline}}\times100
+$$
