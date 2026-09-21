@@ -1,0 +1,20 @@
+{
+    "coordinate_system": {
+        "description": "Subject Response Patch"
+    },
+    "image": {
+        "path": "C:/Users/jimin/LightControl/subject_response/R0G0B255I255.png",
+        "width": 1920,
+        "height": 1080
+    },
+    "patches": [
+        {
+            "x_min": 941,
+            "y_min": 172,
+            "x_max": 1047,
+            "y_max": 231,
+            "width": 107,
+            "height": 60
+        }
+    ]
+}

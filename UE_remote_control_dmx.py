@@ -104,8 +104,8 @@ def ColorCheckerCapture():
 if __name__ == "__main__":
     lighting_temperature = {
     "r": 255,
-    "g": 0,
-    "b": 0,
+    "g": 255,
+    "b": 255,
     "i": 255
   }
     dmx_remote_control(lighting_temperature)
